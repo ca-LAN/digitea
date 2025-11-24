@@ -6,6 +6,29 @@ let formPopover = document.querySelector('#formPopover')
 let createButton = document.querySelector('#createButton')
 let formHeading = document.querySelector('#formPopover h2')
 
+// Popover show/hide helpers with fallbacks for browsers without the popover API
+const popoverShow = (el) => {
+    if (!el) return
+    if (typeof el.showPopover === 'function') {
+        el.showPopover()
+        return
+    }
+    // fallback: make element visible and focus the first input
+    el.style.display = 'block'
+    const first = el.querySelector('input,textarea,select,button')
+    if (first) first.focus()
+}
+
+const popoverHide = (el) => {
+    if (!el) return
+    if (typeof el.hidePopover === 'function') {
+        el.hidePopover()
+        return
+    }
+    // fallback: hide the element
+    el.style.display = 'none'
+}
+
 // Get form data and process each type of input
 // Prepare the data as JSON with a proper set of types
 // e.g. Booleans, Numbers, Dates
@@ -20,10 +43,10 @@ const getFormData = () => {
         const value = json[el.name]
         const isEmpty = !value || value.trim() === ''
 
-        // Represent checkboxes as a Boolean value (true/false)
-        if (el.type === 'checkbox') {
-            json[el.name] = el.checked
-        }
+            // Represent checkboxes as a Boolean value (true/false)
+            if (el.type === 'checkbox') {
+                json[el.name] = el.checked
+            }
         // Represent number and range inputs as actual numbers
         else if (el.type === 'number' || el.type === 'range') {
             json[el.name] = isEmpty ? null : Number(value)
@@ -44,7 +67,7 @@ myForm.addEventListener('submit', async event => {
     const data = getFormData()
     await saveItem(data)
     myForm.reset()
-    formPopover.hidePopover()
+    popoverHide(formPopover)
 })
 
 
@@ -115,10 +138,10 @@ const editItem = (data) => {
     })
 
     // Update the heading to indicate edit mode
-    formHeading.textContent = '🐈 Edit Cat'
+    formHeading.textContent = '🍵 Edit Tea'
 
-    // Show the popover
-    formPopover.showPopover()
+    // Show the popover (use fallback if API missing)
+    popoverShow(formPopover)
 }
 
 // Delete item
@@ -149,7 +172,7 @@ const deleteItem = async (id) => {
     }
 }
 
-
+// helper function. here to not clutter up the rest of the template
 const calendarWidget = (date) => {
     if (!date) return ''
     const month = new Date(date).toLocaleString("en-CA", { month: 'short', timeZone: "UTC" })
@@ -170,55 +193,49 @@ const renderItem = (item) => {
     div.classList.add('item-card')
     div.setAttribute('data-id', item.id)
 
+    const primary = item.primaryColor || '#5f5854'
+    const secondary = item.secondaryColor || '#c4c8cf'
+
     const template = /*html*/`  
     <div class="item-heading">
         <h3> ${item.name} </h3>
-        <div class="microchip-info">
-            <img src="./assets/chip.svg" /> ${item.microchip || '<i>???</i>'} 
-        </div>  
+        <div class="company-info">${item.company ? item.company : '<i>Unknown</i>'}</div>
     </div>
     <div class="item-info"> 
         <div class="item-icon" style="
             background: linear-gradient(135deg, 
-            ${item.primaryColor} 0%, 
-            ${item.primaryColor} 40%, 
-            ${item.secondaryColor} 60%, 
-            ${item.secondaryColor} 100%); 
+            ${primary} 0%, 
+            ${primary} 40%, 
+            ${secondary} 60%, 
+            ${secondary} 100%); 
         ">
-        </div> 
+        </div>
         <div class="stats">
             <div class="stat">
-                <span>Playfulness</span>
-                <meter max="10" min="0" value="${item.playfulness || 0}"></meter> 
+                <span>Type</span>
+                <strong>${item.type || ''}</strong>
             </div>
             <div class="stat">
-                <span>Appetite</span>
-                <meter max="10" min="0" value="${item.appetite || 0}"></meter> 
+                <span>Style</span>
+                <strong>${item.style || ''}</strong>
             </div>
-        </div> 
-            
-         ${calendarWidget(item.birthDate)}
-    </div>
-        
-    <div class="item-info">  
-        <section class="breed" style="${item.breed ? '' : 'display:none;'}">  
-            <img src="./assets/ribbon.svg" />  ${item.breed}
-        </section>
-        <section class="food" style="${item.food ? '' : 'display:none;'}">
-             <img src="./assets/${item.food}.svg" /> <span>${item.food} food</span>
-        </section> 
-        <section class="adoption">
-            <img src="./assets/${item.isAdopted ? 'adopted' : 'paw'}.svg" />
-            ${item.isAdopted ? 'Adopted' : 'Available'}
-        </section> 
+            <div class="stat">
+                <span>Rating</span>
+                <meter max="5" min="1" value="${item.rating || 1}"></meter>
+            </div>
+        </div>
+        ${calendarWidget(item.dateConsumed)}
     </div>
 
-    <section class="description" style="${item.description ? '' : 'display:none;'}">  
-        <p>${item.description}</p>
+    <section class="preferences" style="${item.preferences ? '' : 'display:none;'}">
+        <h4>Preferences</h4>
+        <pre>${item.preferences || ''}</pre>
     </section>
 
-        
-           
+    <section class="notes" style="${item.notes ? '' : 'display:none;'}">
+        <p>${item.notes || ''}</p>
+    </section>
+
         <div class="item-actions">
             <button class="edit-btn">Edit</button>
             <button class="delete-btn">Delete</button>
@@ -272,10 +289,16 @@ const getData = async () => {
 }
 
 // Revert to the default form title on reset
-myForm.addEventListener('reset', () => formHeading.textContent = '🐈 Share a Cat')
+myForm.addEventListener('reset', () => formHeading.textContent = '🍵 Share a Tea')
 
 // Reset the form when the create button is clicked. 
 createButton.addEventListener('click', myForm.reset())
+
+// Load initial data
+getData()
+
+// Hide popover on initial load
+popoverHide(formPopover)
 
 // Load initial data
 getData()
