@@ -146,7 +146,7 @@ const editItem = (data) => {
 
 // Delete item
 const deleteItem = async (id) => {
-    if (!confirm('Are you sure you want to delete this cat?')) {
+    if (!confirm('Are you sure you want to delete this tea?')) {
         return
     }
 
@@ -187,65 +187,77 @@ const calendarWidget = (date) => {
 
 }
 
-// Render a single item
+// Format date as "MON D, YYYY" (e.g. NOV 2, 2025)
+const formatDate = (date) => {
+    if (!date) return ''
+    const d = new Date(date)
+    const month = d.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }).toUpperCase()
+    const day = d.toLocaleString('en-US', { day: 'numeric', timeZone: 'UTC' })
+    const year = d.toLocaleString('en-US', { year: 'numeric', timeZone: 'UTC' })
+    return `${month} ${day}, ${year}`
+}
+
+// Render a single item (ordered layout requested)
 const renderItem = (item) => {
     const div = document.createElement('div')
     div.classList.add('item-card')
     div.setAttribute('data-id', item.id)
 
-    const primary = item.primaryColor || '#5f5854'
+    const primary = item.primaryColor || '#d19234ff'
     const secondary = item.secondaryColor || '#c4c8cf'
 
-    const template = /*html*/`  
-    <div class="item-heading">
-        <h3> ${item.name} </h3>
-        <div class="company-info">${item.company ? item.company : '<i>Unknown</i>'}</div>
-    </div>
-    <div class="item-info"> 
-        <div class="item-icon" style="
-            background: linear-gradient(135deg, 
-            ${primary} 0%, 
-            ${primary} 40%, 
-            ${secondary} 60%, 
-            ${secondary} 100%); 
-        ">
-        </div>
-        <div class="stats">
-            <div class="stat">
-                <span>Type</span>
-                <strong>${item.type || ''}</strong>
-            </div>
-            <div class="stat">
-                <span>Style</span>
-                <strong>${item.style || ''}</strong>
-            </div>
-            <div class="stat">
-                <span>Rating</span>
-                <meter max="5" min="1" value="${item.rating || 1}"></meter>
+    const favoriteSrc = item.favorite ? './assets/favorite-true.svg' : './assets/favorite-false.svg'
+    const caffeineIcon = (item.caffeineLevel && Number(item.caffeineLevel) > 0) ? './assets/caf-true-icon.svg' : './assets/caf-false-icon.svg'
+
+    const ratingValue = Math.max(0, Math.min(5, Number(item.rating) || 0))
+
+    const companyText = item.company ? item.company : '<i>Unknown</i>'
+
+    const template = /*html*/`
+    <div class="item-header" style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;">
+        <div style="display:flex;flex-direction:column;">
+            <h3 style="margin:0">${item.name}</h3>
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.35rem;">
+                <img src="./assets/company-icon.svg" alt="company" style="width:18px;height:18px;" />
+                <div class="company-info">${companyText}</div>
             </div>
         </div>
-        ${calendarWidget(item.dateConsumed)}
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.25rem;">
+            <div style="display:flex;gap:0.5rem;align-items:center;">
+                <img src="${favoriteSrc}" alt="favorite" style="width:26px;height:26px;" />
+                <img src="${caffeineIcon}" alt="caffeine" style="width:22px;height:22px;" />
+            </div>
+        </div>
     </div>
 
-    <section class="preferences" style="${item.preferences ? '' : 'display:none;'}">
-        <h4>Preferences</h4>
-        <pre>${item.preferences || ''}</pre>
+    <div class="caffeine-row" style="display:flex;align-items:center;gap:0.5rem;margin-top:0.6rem;">
+        <meter max="10" min="0" value="${item.caffeineLevel || 0}" style="flex:1;height:1rem;"></meter>
+        <img src="${caffeineIcon}" alt="caffeine" style="width:22px;height:22px;" />
+    </div>
+
+    <div class="rating-row" style="display:flex;align-items:center;gap:0.5rem;margin-top:0.6rem;">
+        <meter max="5" min="1" value="${ratingValue || 1}" style="width:140px;height:1rem;"></meter>
+        <div style="font-weight:700">${ratingValue}/5</div>
+    </div>
+
+    <div class="date-row" style="margin-top:0.35rem;color:#666;">${formatDate(item.dateConsumed)}</div>
+
+    <section class="notes" style="${item.notes ? '' : 'display:none;'};margin-top:0.6rem;">
+        <p style="margin:0">${item.notes || ''}</p>
     </section>
 
-    <section class="notes" style="${item.notes ? '' : 'display:none;'}">
-        <p>${item.notes || ''}</p>
-    </section>
-
-        <div class="item-actions">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-        </div>
+    <div style="display:flex;gap:1rem;justify-content:flex-end;margin-top:0.6rem;">
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn">Delete</button>
+    </div>
     `
-    div.innerHTML = DOMPurify.sanitize(template);
 
-    // Add event listeners to buttons
-    div.querySelector('.edit-btn').addEventListener('click', () => editItem(item))
-    div.querySelector('.delete-btn').addEventListener('click', () => deleteItem(item.id))
+    div.innerHTML = DOMPurify.sanitize(template)
+
+    const editBtn = div.querySelector('.edit-btn')
+    const deleteBtn = div.querySelector('.delete-btn')
+    if (editBtn) editBtn.addEventListener('click', () => editItem(item))
+    if (deleteBtn) deleteBtn.addEventListener('click', () => deleteItem(item.id))
 
     return div
 }
@@ -286,6 +298,7 @@ const getData = async () => {
         console.error('Error fetching data:', error)
         notReadyStatus.style.display = 'block'
     }
+
 }
 
 // Revert to the default form title on reset
@@ -293,9 +306,6 @@ myForm.addEventListener('reset', () => formHeading.textContent = '🍵 Share a T
 
 // Reset the form when the create button is clicked. 
 createButton.addEventListener('click', myForm.reset())
-
-// Load initial data
-getData()
 
 // Hide popover on initial load
 popoverHide(formPopover)

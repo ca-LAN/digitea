@@ -274,6 +274,29 @@ textarea:user-invalid+.validation {
     width: 100%;
 }
 
+.title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.favorite-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #444;
+}
+
+.company-icon-img {
+    width: 22px;
+    height: 22px;
+}
+
 .microchip-info {
     display: flex;
     flex-direction: row;
@@ -398,6 +421,43 @@ meter::-webkit-meter-even-less-good-value {
     font-weight: 300;
     padding: 0 3rem 0 1rem;
 
+}
+
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-text {
+    font-weight: 700;
+    min-width: 2.25rem;
+    text-align: right;
+}
+
+.rating-circles .circle {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 2px;
+    background: #ddd;
+    border: 1px solid #ccc;
+}
+
+.rating-circles .circle.filled {
+    background: #0c5b3a;
+}
+
+.caffeine-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.caffeine-icon {
+    width: 20px;
+    height: 20px;
 }
 
 .stat span {

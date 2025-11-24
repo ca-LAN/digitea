@@ -53,7 +53,7 @@
     id="formPopover"
     popover
   >
-    <h2>🍵 Share a Tea</h2>
+    <h2>Add a Tea</h2>
     <p>Add a tea to your collection</p>
     <form id="myForm">
       <!-- Hidden field to store ID for updates -->
@@ -121,8 +121,14 @@
 
       <fieldset>
         <label for="rating">Personal Rating</label>
-        <input type="number" name="rating" id="rating" min="1" max="5" step="1" />
+        <input type="range" name="rating" id="rating" min="1" max="5" step="1" />
         <small>1 (low) — 5 (high)</small>
+      </fieldset>
+
+      <fieldset>
+        <label for="caffeineLevel">Caffeine Level</label>
+        <input type="range" name="caffeineLevel" id="caffeineLevel" min="0" max="10" step="1" />
+        <small>0 (decaf) — 10 (very strong)</small>
       </fieldset>
 
       <fieldset>
@@ -153,26 +159,6 @@
     <section id="contentArea"></section>
   </main>
 
-  <section id="intro">
-    <h3>About</h3>
-    <p>This app demonstrates a simple CRUD flow for a tea collection using a backend API and an HTML form. The form
-      stores an ID for edits so that the frontend can update or delete specific tea entries through the API.
-    </p>
-
-    <h3>Learning Prompts</h3>
-    <p>Can you add a connection string to the NodeJS environment (e.g. .env file) for your own MongoDB Atlas Cluster?
-    </p>
-    <p>Use MongoDB Compass to verify that your data collection form is working. </p>
-    <p>Try out all CRUD operations: Create a new tea, Edit an existing tea by clicking the Edit button, and Delete a tea
-      you no longer need.</p>
-    <p>Explore the API endpoints in your browser: visit /data to see all teas in JSON format, or try /search?terms=Sencha
-      to search for specific teas.</p>
-  </section>
-
-  <footer>
-    Created by <a href="https://nsitu.ca">Harold Sikkema</a> in the context of
-    Systems Design in the Interaction Design program at Sheridan College.
-  </footer>
 
   <script
     src="script.js"
