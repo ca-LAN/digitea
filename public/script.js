@@ -172,21 +172,6 @@ const deleteItem = async (id) => {
     }
 }
 
-// helper function. here to not clutter up the rest of the template
-const calendarWidget = (date) => {
-    if (!date) return ''
-    const month = new Date(date).toLocaleString("en-CA", { month: 'short', timeZone: "UTC" })
-    const day = new Date(date).toLocaleString("en-CA", { day: '2-digit', timeZone: "UTC" })
-    const year = new Date(date).toLocaleString("en-CA", { year: 'numeric', timeZone: "UTC" })
-    return ` <div class="calendar">
-                <div class="born"><img src="./assets/birthday.svg" /></div>
-                <div class="month">${month}</div>
-                <div class="day">${day}</div> 
-                <div class="year">${year}</div>
-            </div>`
-
-}
-
 // Format date as "MON D, YYYY" (e.g. NOV 2, 2025)
 const formatDate = (date) => {
     if (!date) return ''
@@ -208,49 +193,70 @@ const renderItem = (item) => {
 
     const favoriteSrc = item.favorite ? './assets/favorite-true.svg' : './assets/favorite-false.svg'
     const caffeineIcon = (item.caffeineLevel && Number(item.caffeineLevel) > 0) ? './assets/caf-true-icon.svg' : './assets/caf-false-icon.svg'
+    
+    const stylePic = (item.style == "LOOSE_LEAF") ? './assets/loose-true-icon.svg' : './assets/loose-false-icon.svg'
+    const styleText = (item.style == "LOOSE_LEAF") ? 'Loose Leaf' : 'Bagged'
 
     const ratingValue = Math.max(0, Math.min(5, Number(item.rating) || 0))
 
     const companyText = item.company ? item.company : '<i>Unknown</i>'
 
-
     const template = /*html*/`
 
-    <div class="item-header"> 
-        <div id="tea-info">
-            <h3>${item.name}</h3>
-            <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.35rem;">
-                <img src="./assets/tea-type-icon.svg" alt="type" style="width:20px;height:20px;" />
-                <div class="tea-type">${item.type}</div>
-            </div>    
-        </div>
-        <div id="tea-color">
+    <div class="main-content" >
+    <div class="topElements"style="background-color:${secondary};width:auto;height:auto;   display:grid;grid-template-columns: 33% 33% 33%;">
+    <img src="./assets/tag-visual.svg" style="width:24px;height:auto;display:grid;align-items:left;margin-left:15px;;"/>
+    <img src="./assets/top-hole.svg" style="width:24px;height:auto;display:grid;align-items:center;margin:auto; margin-top:10px;"/>
+    </div>    
+    <div class="item-header" style="background-color:${secondary};"> 
         
+            <div id="tea-info">
+                <h3 class="tea-name" id="top">${item.name}</h3>
+                <div id="tea-type-icon" style="display:flex;align-items:center;gap:0.5rem;margin-top:0.35rem;">
+                    <div style="width:20px;height:20px;background:#FFF1D8;-webkit-mask: url('./assets/tea-type-icon.svg') no-repeat center/contain;mask: url('./assets/tea-type-icon.svg') no-repeat center/contain;"></div>
+                    <div class="tea-type">${item.type}</div>
+                </div>    
+            </div>
+            <div id="tea-color"style="align-items:end;">
+                <div style="width:45px;height:45px;background:${primary};-webkit-mask: url('./assets/tea-color-icon.svg') no-repeat center/contain;mask: url('./assets/tea-color-icon.svg') no-repeat center/contain;"></div>
+            </div>
         </div>
+    
+        <div class="rating-row" style="display:flex;align-items:center;gap:0.5rem;">
+            <meter max="5" min="1" value="${ratingValue || 1}" style="--meter-accent:${primary}; --meter-border:${secondary}; flex:1;"></meter>  
+            <div style="font-weight:700;color:${secondary};">${ratingValue}/5</div> 
+        </div>
+
+        <div class="date-row" style="">${formatDate(item.dateConsumed)}</div>
     </div>
     
-
-    <div class="caffeine-row" style="display:flex;align-items:center;gap:0.5rem;margin-top:0.6rem;">
-    <img src="${caffeineIcon}" alt="caffeine" style="width:22px;height:22px;" />    
-    <meter max="10" min="0" value="${item.caffeineLevel || 0}" style="flex:1;height:1rem;"></meter>
+    <div class="string-connector"></div>
+    <div class="container" style="background-color:${secondary};">
+        <div class="extra-info" style="border-color:${secondary};">
         
-    </div>
-
-    <div class="rating-row" style="display:flex;align-items:center;gap:0.5rem;margin-top:0.6rem;">
-        <meter max="5" min="1" value="${ratingValue || 1}" style="width:140px;height:1rem;"></meter>
-        <div style="font-weight:700">${ratingValue}/5</div>
-    </div>
-
-    <div class="date-row" style="margin-top:0.35rem;color:#666;">${formatDate(item.dateConsumed)}</div>
-
-    <section class="notes" style="${item.notes ? '' : 'display:none;'};margin-top:0.6rem;">
-        <p style="margin:0">${item.notes || ''}</p>
-    </section>
-
-    /** additional info for extra div */
-    <div style="display:flex;gap:1rem;justify-content:flex-end;margin-top:0.6rem;">
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
+        <div style="display:flex;align-items:center;gap:0.5rem;">
+                    <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('./assets/company-icon.svg') no-repeat center/contain;mask: url('./assets/company-icon.svg') no-repeat center/contain;"></div>
+                    <div class="company"id="description">${companyText}</div>
+            </div> 
+            <div class="caffeine-row" style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('${caffeineIcon}') no-repeat center/contain;mask: url('${caffeineIcon}') no-repeat center/contain;"></div>
+                <meter max="10" min="0" value="${item.caffeineLevel || 0}" style="--meter-accent:${secondary}; --meter-border:${secondary}; flex:1;height:1rem;"></meter>   
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('${stylePic}') no-repeat center/contain;mask: url('${stylePic}') no-repeat center/contain;"></div>
+                <div class="style"id="description">${styleText}</div>
+            </div>
+            <section class="details" style="${item.preferences ? '' : 'display:none;'};margin-top:0.6rem;">
+                <p style="margin:0">${item.preferences || ''}</p>
+            </section>
+            <section class="notes" style="${item.notes ? '' : 'display:none;'};margin-top:0.6rem;">
+                <i style="margin:0">"${item.notes || ''}"</i>
+            </section>
+            <div class="buttons"style="margin-top:0.6rem;">
+                <button class="edit-btn" style="background: #FFF1D8; border: 2px solid ${secondary}; color: ${secondary};">edit</button>
+                <button class="delete-btn" style="background: #FFF1D8; border: 2px solid ${secondary}; color: ${secondary};">delete</button>
+            </div>
+        </div>
     </div>
     `
 
@@ -314,3 +320,53 @@ popoverHide(formPopover)
 
 // Load initial data
 getData()
+
+// Enable click-and-drag horizontal scrolling for the content area
+// - mouse: mousedown -> mousemove -> mouseup/leave
+// - touch: touchstart -> touchmove -> touchend
+;(function enableDragScroll() {
+    if (!contentArea) return
+
+    let isDown = false
+    let startX = 0
+    let scrollLeftStart = 0
+
+    // Set initial cursor
+
+    contentArea.addEventListener('mousedown', (e) => {
+        isDown = true
+        startX = e.pageX - contentArea.offsetLeft
+        scrollLeftStart = contentArea.scrollLeft
+    })
+
+    document.addEventListener('mouseup', () => {
+        if (!isDown) return
+        isDown = false
+    })
+
+    contentArea.addEventListener('mouseleave', () => {
+        if (!isDown) return
+        isDown = false
+    })
+
+    contentArea.addEventListener('mousemove', (e) => {
+        if (!isDown) return
+        e.preventDefault()
+        const x = e.pageX - contentArea.offsetLeft
+        const walk = (x - startX) * 1.5 // sensitivity multiplier
+        contentArea.scrollLeft = scrollLeftStart - walk
+    })
+
+    // Touch support
+    contentArea.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX - contentArea.offsetLeft
+        scrollLeftStart = contentArea.scrollLeft
+    }, { passive: true })
+
+    contentArea.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX - contentArea.offsetLeft
+        const walk = (x - startX) * 1.5
+        contentArea.scrollLeft = scrollLeftStart - walk
+    }, { passive: true })
+
+})()

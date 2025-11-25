@@ -8,7 +8,7 @@
     content="width=device-width initial-scale=1"
   />
 
-  <title>Managing Data</title>
+  <title>Tea Data!</title>
 
   <link
     rel="preconnect"
@@ -27,7 +27,11 @@
     rel="stylesheet"
     href="style.css"
   />
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rock+Salt&family=Rubik+Dirt&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap" rel="stylesheet">
   <!--  DOMPurify cleans up HTML to prevent XSS attacks
   https://www.jsdelivr.com/package/npm/dompurify  -->
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.3.0/dist/purify.min.js"></script>
@@ -35,19 +39,25 @@
 </head>
 
 <body>
-  <header>
-    <h1>Tea Collection</h1>
-    <h4>CRUD: manage your teas</h4>
-  </header>
-  <section id="status">
-    <p id="readyStatus">✅ MongoDB is Ready</p>
-    <p id="notReadyStatus">❌ MongoDB is not connected. Please check your connection string in <code>.env</code> file.
-    </p>
-  </section>
-  <button
+  <header id="header">
+    <div id="titleSection"> 
+      <h1>Tea Collection</h1>
+        <section id="status">
+          <img id="readyStatus" src="./assets/cloud_safe.svg"> 
+          <!-- <p id="readyStatus">✅ MongoDB is Ready</p> -->
+           <img id="notReadyStatus"src="./assets/cloud_alert.svg"> 
+          <!-- <p id="notReadyStatus">❌ MongoDB is not connected. Please check your connection string in <code>.env</code> file.</p> -->
+      </section>
+    </div>
+    <div id="buttonSection">
+      <button
     id="createButton"
     popovertarget="formPopover"
   >Add New Tea</button>
+    </div>
+  </header>
+  
+  
 
   <div
     id="formPopover"
@@ -155,9 +165,9 @@
   </div>
 
   <main>
-    <h2>🍵 Noteworthy Teas</h2>
-    <section id="contentArea"></section>
+    <section id="contentArea"style="overflow:scroll;overflow-y:hidden;padding-bottom:10px;"></section>
   </main>
+  <div id="shelf"></div>
 
 
   <script
