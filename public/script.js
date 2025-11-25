@@ -43,10 +43,10 @@ const getFormData = () => {
         const value = json[el.name]
         const isEmpty = !value || value.trim() === ''
 
-            // Represent checkboxes as a Boolean value (true/false)
-            if (el.type === 'checkbox') {
-                json[el.name] = el.checked
-            }
+        // Represent checkboxes as a Boolean value (true/false)
+        if (el.type === 'checkbox') {
+            json[el.name] = el.checked
+        }
         // Represent number and range inputs as actual numbers
         else if (el.type === 'number' || el.type === 'range') {
             json[el.name] = isEmpty ? null : Number(value)
@@ -213,26 +213,27 @@ const renderItem = (item) => {
 
     const companyText = item.company ? item.company : '<i>Unknown</i>'
 
+
     const template = /*html*/`
-    <div class="item-header" style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;">
-        <div style="display:flex;flex-direction:column;">
-            <h3 style="margin:0">${item.name}</h3>
+
+    <div class="item-header"> 
+        <div id="tea-info">
+            <h3>${item.name}</h3>
             <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.35rem;">
-                <img src="./assets/company-icon.svg" alt="company" style="width:18px;height:18px;" />
-                <div class="company-info">${companyText}</div>
-            </div>
+                <img src="./assets/tea-type-icon.svg" alt="type" style="width:20px;height:20px;" />
+                <div class="tea-type">${item.type}</div>
+            </div>    
         </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.25rem;">
-            <div style="display:flex;gap:0.5rem;align-items:center;">
-                <img src="${favoriteSrc}" alt="favorite" style="width:26px;height:26px;" />
-                <img src="${caffeineIcon}" alt="caffeine" style="width:22px;height:22px;" />
-            </div>
+        <div id="tea-color">
+        
         </div>
     </div>
+    
 
     <div class="caffeine-row" style="display:flex;align-items:center;gap:0.5rem;margin-top:0.6rem;">
-        <meter max="10" min="0" value="${item.caffeineLevel || 0}" style="flex:1;height:1rem;"></meter>
-        <img src="${caffeineIcon}" alt="caffeine" style="width:22px;height:22px;" />
+    <img src="${caffeineIcon}" alt="caffeine" style="width:22px;height:22px;" />    
+    <meter max="10" min="0" value="${item.caffeineLevel || 0}" style="flex:1;height:1rem;"></meter>
+        
     </div>
 
     <div class="rating-row" style="display:flex;align-items:center;gap:0.5rem;margin-top:0.6rem;">
@@ -246,6 +247,7 @@ const renderItem = (item) => {
         <p style="margin:0">${item.notes || ''}</p>
     </section>
 
+    /** additional info for extra div */
     <div style="display:flex;gap:1rem;justify-content:flex-end;margin-top:0.6rem;">
         <button class="edit-btn">Edit</button>
         <button class="delete-btn">Delete</button>
