@@ -223,11 +223,13 @@ const renderItem = (item) => {
         </div>
     
         <div class="rating-row" style="display:flex;align-items:center;gap:0.5rem;">
-            <meter max="5" min="1" value="${ratingValue || 1}" style="--meter-accent:${primary}; --meter-border:${secondary}; flex:1;"></meter>  
+            <meter max="5" min="1" value="${ratingValue || 1}" style="--meter-accent:${secondary}; --meter-border:${secondary}; flex:1;"></meter>  
             <div style="font-weight:700;color:${secondary};">${ratingValue}/5</div> 
         </div>
-
+        <div class= date-container>
         <div class="date-row" style="">${formatDate(item.dateConsumed)}</div>
+        <div class="line" style="border-color:${secondary};"></div>
+        </div>
     </div>
     
     <div class="string-connector"></div>
@@ -244,12 +246,12 @@ const renderItem = (item) => {
             </div>
             <div style="display:flex;align-items:center;gap:0.5rem;">
                 <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('${stylePic}') no-repeat center/contain;mask: url('${stylePic}') no-repeat center/contain;"></div>
-                <div class="style"id="description">${styleText}</div>
+                <div class="ex-header"id="description" >${styleText}</div>
             </div>
-            <section class="details" style="${item.preferences ? '' : 'display:none;'};margin-top:0.6rem;">
+            <section class="details" id="text-field" style="${item.preferences ? '' : 'display:none;'};margin-top:0.6rem;border-color:${secondary}">
                 <p style="margin:0">${item.preferences || ''}</p>
             </section>
-            <section class="notes" style="${item.notes ? '' : 'display:none;'};margin-top:0.6rem;">
+            <section class="notes" id="text-field" style="${item.notes ? '' : 'display:none;'};margin-top:0.6rem;border-color:${secondary}">
                 <i style="margin:0">"${item.notes || ''}"</i>
             </section>
             <div class="buttons"style="margin-top:0.6rem;">
