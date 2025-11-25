@@ -3,35 +3,25 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width initial-scale=1"
-  />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
 
   <title>Tea Data!</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rock+Salt&family=Rubik+Dirt&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap"
+    rel="stylesheet">
   <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap"
+    rel="stylesheet">
   <link
-    href="https://fonts.googleapis.com/css2?family=Jost:wght@100..900&display=swap"
-    rel="stylesheet"
-  >
-  <link
-    rel="stylesheet"
-    href="style.css"
-  />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rock+Salt&family=Rubik+Dirt&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap" rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Tapestry&display=swap"
+    rel="stylesheet">
   <!--  DOMPurify cleans up HTML to prevent XSS attacks
   https://www.jsdelivr.com/package/npm/dompurify  -->
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.3.0/dist/purify.min.js"></script>
@@ -40,48 +30,31 @@
 
 <body>
   <header id="header">
-    <div id="titleSection"> 
+    <div id="titleSection">
       <h1>Tea Collection</h1>
-        <section id="status">
-          <img id="readyStatus" src="./assets/cloud_safe.svg"> 
-          <!-- <p id="readyStatus">✅ MongoDB is Ready</p> -->
-           <img id="notReadyStatus"src="./assets/cloud_alert.svg"> 
-          <!-- <p id="notReadyStatus">❌ MongoDB is not connected. Please check your connection string in <code>.env</code> file.</p> -->
+      <section id="status">
+        <img id="readyStatus" src="./assets/cloud_safe.svg">
+        <!-- <p id="readyStatus">✅ MongoDB is Ready</p> -->
+        <img id="notReadyStatus" src="./assets/cloud_alert.svg">
+        <!-- <p id="notReadyStatus">❌ MongoDB is not connected. Please check your connection string in <code>.env</code> file.</p> -->
       </section>
     </div>
     <div id="buttonSection">
-      <button
-    id="createButton"
-    popovertarget="formPopover"
-  >Add New Tea</button>
+      <button id="createButton" popovertarget="formPopover">add new tea</button>
     </div>
   </header>
-  
-  
 
-  <div
-    id="formPopover"
-    popover
-  >
+
+
+  <div id="formPopover" popover>
     <h2>Add a Tea</h2>
     <p>Add a tea to your collection</p>
     <form id="myForm">
       <!-- Hidden field to store ID for updates -->
-      <input
-        type="hidden"
-        name="id"
-        id="id"
-      />
+      <input type="hidden" name="id" id="id" />
       <fieldset>
         <label for="name">Tea Name</label>
-        <input
-          required
-          type="text"
-          name="name"
-          id="name"
-          placeholder="e.g. Sencha"
-          autocomplete="off"
-        />
+        <input required type="text" name="name" id="name" placeholder="e.g. Sencha" autocomplete="off" />
         <small class="validation">Name is required</small>
       </fieldset>
 
@@ -102,7 +75,7 @@
 
       <fieldset>
         <label for="company">Company / Brand</label>
-        <input type="text" name="company" id="company" placeholder="e.g. Yamamotoyama" />
+        <input type="text" name="company" id="company" placeholder="e.g. Maeda-en" />
       </fieldset>
 
       <fieldset>
@@ -126,11 +99,12 @@
           <option value="" disabled selected>Select a style</option>
           <option value="LOOSE_LEAF">Loose Leaf</option>
           <option value="BAGGED">Bagged</option>
+          <option value="POWDER">Powder</option>
         </select>
       </fieldset>
 
       <fieldset>
-        <label for="rating">Personal Rating</label>
+        <label for="rating">Rate it!</label>
         <input type="range" name="rating" id="rating" min="1" max="5" step="1" />
         <small>1 (low) — 5 (high)</small>
       </fieldset>
@@ -142,38 +116,34 @@
       </fieldset>
 
       <fieldset>
-        <label for="preferences">Preferences</label>
-        <small>Optional preparation preferences (plain text). Example: "Hotter water, 2 min steep"</small>
-        <textarea name="preferences" id="preferences" rows="3" cols="30" placeholder='e.g. Hotter water, 2 min steep'></textarea>
+        <label for="preferences">Details</label>
+        <textarea name="preferences" id="preferences" rows="3" cols="30"
+          placeholder='Consumer level sencha. '></textarea>
       </fieldset>
 
       <fieldset>
         <label for="notes">Notes</label>
-        <textarea name="notes" id="notes" rows="6" cols="30" placeholder="Tasting notes, aroma, mouthfeel..."></textarea>
+        <textarea name="notes" id="notes" rows="6" cols="30"
+          placeholder="Taste, enjoyment, aroma, experience, friends?"></textarea>
       </fieldset>
 
       <fieldset>
         <button class="save">Save</button>
-        <button
-          class="cancel"
-          type="button"
-          popovertarget="formPopover"
-          popovertargetaction="hide"
-        >Cancel</button>
+        <button class="cancel" type="button" popovertarget="formPopover" popovertargetaction="hide">Cancel</button>
       </fieldset>
     </form>
   </div>
 
   <main>
-    <section id="contentArea"style="overflow:scroll;overflow-y:hidden;padding-bottom:10px;"></section>
+    <section id="contentArea" style="overflow:scroll;overflow-y:hidden;padding-bottom:10px;"></section>
+    <div id="bar"
+      style="background: linear-gradient(to bottom, #2f2119, #855b4200);height:6rem;margin-left:2rem;margin-right:2rem;">
+    </div>
   </main>
   <div id="shelf"></div>
 
 
-  <script
-    src="script.js"
-    type="module"
-  ></script>
+  <script src="script.js" type="module"></script>
 
 </body>
 

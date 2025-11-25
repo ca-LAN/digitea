@@ -193,10 +193,16 @@ const renderItem = (item) => {
 
     const favoriteSrc = item.favorite ? './assets/favorite-true.svg' : './assets/favorite-false.svg'
     const caffeineIcon = (item.caffeineLevel && Number(item.caffeineLevel) > 0) ? './assets/caf-true-icon.svg' : './assets/caf-false-icon.svg'
-    
-    const stylePic = (item.style == "LOOSE_LEAF") ? './assets/loose-true-icon.svg' : './assets/loose-false-icon.svg'
-    const styleText = (item.style == "LOOSE_LEAF") ? 'Loose Leaf' : 'Bagged'
 
+    let stylePic;
+    let styleText;
+    if (item.style == "POWDER") {
+        stylePic = './assets/powder-icon.svg'
+        styleText = 'Powder'
+    } else {
+        stylePic = (item.style == "LOOSE_LEAF") ? './assets/loose-true-icon.svg' : './assets/loose-false-icon.svg'
+        styleText = (item.style == "LOOSE_LEAF") ? 'Loose Leaf' : 'Bagged'
+    }
     const ratingValue = Math.max(0, Math.min(5, Number(item.rating) || 0))
 
     const companyText = item.company ? item.company : '<i>Unknown</i>'
@@ -323,52 +329,52 @@ popoverHide(formPopover)
 // Load initial data
 getData()
 
-// Enable click-and-drag horizontal scrolling for the content area
-// - mouse: mousedown -> mousemove -> mouseup/leave
-// - touch: touchstart -> touchmove -> touchend
-;(function enableDragScroll() {
-    if (!contentArea) return
+    // Enable click-and-drag horizontal scrolling for the content area
+    // - mouse: mousedown -> mousemove -> mouseup/leave
+    // - touch: touchstart -> touchmove -> touchend
+    ; (function enableDragScroll() {
+        if (!contentArea) return
 
-    let isDown = false
-    let startX = 0
-    let scrollLeftStart = 0
+        let isDown = false
+        let startX = 0
+        let scrollLeftStart = 0
 
-    // Set initial cursor
+        // Set initial cursor
 
-    contentArea.addEventListener('mousedown', (e) => {
-        isDown = true
-        startX = e.pageX - contentArea.offsetLeft
-        scrollLeftStart = contentArea.scrollLeft
-    })
+        contentArea.addEventListener('mousedown', (e) => {
+            isDown = true
+            startX = e.pageX - contentArea.offsetLeft
+            scrollLeftStart = contentArea.scrollLeft
+        })
 
-    document.addEventListener('mouseup', () => {
-        if (!isDown) return
-        isDown = false
-    })
+        document.addEventListener('mouseup', () => {
+            if (!isDown) return
+            isDown = false
+        })
 
-    contentArea.addEventListener('mouseleave', () => {
-        if (!isDown) return
-        isDown = false
-    })
+        contentArea.addEventListener('mouseleave', () => {
+            if (!isDown) return
+            isDown = false
+        })
 
-    contentArea.addEventListener('mousemove', (e) => {
-        if (!isDown) return
-        e.preventDefault()
-        const x = e.pageX - contentArea.offsetLeft
-        const walk = (x - startX) * 1.5 // sensitivity multiplier
-        contentArea.scrollLeft = scrollLeftStart - walk
-    })
+        contentArea.addEventListener('mousemove', (e) => {
+            if (!isDown) return
+            e.preventDefault()
+            const x = e.pageX - contentArea.offsetLeft
+            const walk = (x - startX) * 1.5 // sensitivity multiplier
+            contentArea.scrollLeft = scrollLeftStart - walk
+        })
 
-    // Touch support
-    contentArea.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX - contentArea.offsetLeft
-        scrollLeftStart = contentArea.scrollLeft
-    }, { passive: true })
+        // Touch support
+        contentArea.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX - contentArea.offsetLeft
+            scrollLeftStart = contentArea.scrollLeft
+        }, { passive: true })
 
-    contentArea.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX - contentArea.offsetLeft
-        const walk = (x - startX) * 1.5
-        contentArea.scrollLeft = scrollLeftStart - walk
-    }, { passive: true })
+        contentArea.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX - contentArea.offsetLeft
+            const walk = (x - startX) * 1.5
+            contentArea.scrollLeft = scrollLeftStart - walk
+        }, { passive: true })
 
-})()
+    })()

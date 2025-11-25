@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// model cats {
+//   id             String    @id @default(auto()) @map("_id") @db.ObjectId
+//   adoptionDate   DateTime? @db.Date
+//   birthDate      DateTime? @db.Date
+//   breed          String?
+//   declawed       Boolean?
+//   description    String?
+//   fosterDate     DateTime? @db.Date
+//   fosterDuration Int?
+//   location       String?
+//   name           String?
+//   neutered       Boolean?
+//   sex            String?
+//   primaryColor   String?
+//   secondaryColor String?
+//   playfulness    Int?
+//   appetite       Int?
+//   microchip      Int?
+//   isAdopted      Boolean?
+//   food           String?
+// }
+
+// Tea-related enums and model for a personal tea collection
+// enum TeaType {
+//   GREEN
+//   BLACK
+//   OOLONG
+//   WHITE
+//   YELLOW
+//   PUERH
+//   HERBAL
+//   OTHER
+// }
+
+// enum TeaStyle {
+//   LOOSE_LEAF
+//   BAGGED
+// }
+
+model tea {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  type         String?
+  company      String?
+  dateConsumed DateTime? @db.Date
+  style        String?
+  rating       Int?     @db.Int
+  preferences  String?
+  caffeineLevel Int?    @db.Int
+  notes        String?
+  primaryColor String?
+  secondaryColor String?
+  favorite     Boolean? @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
