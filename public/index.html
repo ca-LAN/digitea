@@ -29,8 +29,11 @@
 </head>
 
 <body>
+
   <header id="header">
+
     <div id="titleSection">
+
       <h1>Tea Collection</h1>
       <section id="status">
         <img id="readyStatus" src="./assets/cloud_safe.svg">
@@ -47,20 +50,21 @@
 
 
   <div id="formPopover" popover>
-    <h2>Add a Tea</h2>
-    <p>Add a tea to your collection</p>
+    <div id="form-header">
+      <h2>Add a Tea</h2>
+    </div>
     <form id="myForm">
       <!-- Hidden field to store ID for updates -->
       <input type="hidden" name="id" id="id" />
-      <fieldset>
+      <fieldset id="form-name">
         <label for="name">Tea Name</label>
-        <input required type="text" name="name" id="name" placeholder="e.g. Sencha" autocomplete="off" />
+        <input required type="text" name="name" id="name" class="field" placeholder="e.g. Sencha" autocomplete="off" />
         <small class="validation">Name is required</small>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-type">
         <label for="type">Tea Type</label>
-        <select name="type" id="type" required>
+        <select name="type" id="type" class="field" required>
           <option value="" disabled selected>Select a type</option>
           <option value="Green Tea">Green</option>
           <option value="Black Tea">Black</option>
@@ -73,29 +77,29 @@
         </select>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-company">
         <label for="company">Company / Brand</label>
-        <input type="text" name="company" id="company" placeholder="e.g. Maeda-en" />
+        <input type="text" name="company" id="company" class="field" placeholder="e.g. Maeda-en" />
       </fieldset>
 
-      <fieldset>
-        <label for="primaryColor">Primary Color</label>
-        <input type="color" name="primaryColor" id="primaryColor" value="#5f5854" />
+      <fieldset id="form-primary">
+        <label for="primaryColor">Tea Color</label>
+        <input type="color" name="primaryColor" id="primaryColor" class="field" value="#5f5854" />
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-secondary">
         <label for="secondaryColor">Secondary Color</label>
-        <input type="color" name="secondaryColor" id="secondaryColor" value="#c4c8cf" />
+        <input type="color" name="secondaryColor" id="secondaryColor" class="field" value="#c4c8cf" />
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-date">
         <label for="dateConsumed">Date Consumed</label>
-        <input type="date" name="dateConsumed" id="dateConsumed" />
+        <input type="date" name="dateConsumed" id="dateConsumed" class="field" />
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-style">
         <label for="style">Style</label>
-        <select name="style" id="style" required>
+        <select name="style" id="style" class="field" required>
           <option value="" disabled selected>Select a style</option>
           <option value="LOOSE_LEAF">Loose Leaf</option>
           <option value="BAGGED">Bagged</option>
@@ -103,45 +107,47 @@
         </select>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-rating">
         <label for="rating">Rate it!</label>
-        <input type="range" name="rating" id="rating" min="1" max="5" step="1" />
+        <input type="range" name="rating" id="rating" class="field-rating" min="1" max="5" step="1" />
         <small>1 (low) — 5 (high)</small>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-caffeine">
         <label for="caffeineLevel">Caffeine Level</label>
-        <input type="range" name="caffeineLevel" id="caffeineLevel" min="0" max="10" step="1" />
+        <input type="range" name="caffeineLevel" id="caffeineLevel" class="field-rating" min="0" max="10" step="1" />
         <small>0 (decaf) — 10 (very strong)</small>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-preferences">
         <label for="preferences">Details</label>
-        <textarea name="preferences" id="preferences" rows="3" cols="30"
+        <textarea name="preferences" id="preferences" class="field" rows="6" cols="30"
           placeholder='Consumer level sencha. '></textarea>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="form-notes">
         <label for="notes">Notes</label>
-        <textarea name="notes" id="notes" rows="6" cols="30"
+        <textarea name="notes" id="notes" class="field" rows="6" cols="30"
           placeholder="Taste, enjoyment, aroma, experience, friends?"></textarea>
       </fieldset>
 
-      <fieldset>
-        <button class="save">Save</button>
-        <button class="cancel" type="button" popovertarget="formPopover" popovertargetaction="hide">Cancel</button>
-      </fieldset>
+      <button class="save">Save</button>
+      <button class="cancel" type="button" popovertarget="formPopover" popovertargetaction="hide">Cancel</button>
     </form>
   </div>
 
   <main>
     <section id="contentArea" style="overflow:scroll;overflow-y:hidden;padding-bottom:10px;"></section>
     <div id="bar"
-      style="background: linear-gradient(to bottom, #2f2119, #855b4200);height:6rem;margin-left:2rem;margin-right:2rem;">
+      style="background: linear-gradient(to bottom, #2f2119, #855b4200);height:3rem;margin-left:2rem;margin-right:2rem;margin-bottom:0">
     </div>
   </main>
-  <div id="shelf"></div>
 
+  <footer>
+    Created by Callan Yates following a CRUD activity template provided by Harold Sikkema in the context of
+    Systems Design in the Interaction Design program at Sheridan College. Check out the code <a id="link"
+      href="https://github.com/ca-LAN/digitea">here on github</a>.
+  </footer>
 
   <script src="script.js" type="module"></script>
 

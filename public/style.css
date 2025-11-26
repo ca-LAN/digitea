@@ -18,7 +18,14 @@ body {
 
 footer {
     text-align: center;
-    padding: 3rem;
+    padding: 0rem;
+    color: #FFF1D8;
+    width: 60vw;
+}
+
+#link {
+    text-decoration: underline;
+    color: #FFF1D8;
 }
 
 button {
@@ -27,22 +34,6 @@ button {
     padding: 0.5rem 1rem;
     color: white;
     cursor: pointer;
-}
-
-button.save {
-    background: rgb(3, 136, 3);
-}
-
-button.save:hover {
-    background-color: rgb(3, 103, 3);
-}
-
-button.cancel {
-    background: rgb(134, 134, 134);
-}
-
-button.cancel:hover {
-    background: rgb(101, 101, 101);
 }
 
 /* -------------------------------------------------------------------------------------------------- */
@@ -79,7 +70,6 @@ button.cancel:hover {
     border-bottom-right-radius: 1rem;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
-
 }
 
 /* Handle */
@@ -118,7 +108,6 @@ button.cancel:hover {
 }
 
 .container {
-
     height: max-content;
     width: 290px;
     font-size: 14px;
@@ -133,9 +122,6 @@ button.cancel:hover {
     margin-top: 20px
 }
 
-/* ::-webkit-scrollbar {
-  width: 100%;
-} */
 .extra-info {
     display: grid;
     grid-template-rows: auto auto auto 80px 80px auto;
@@ -264,20 +250,6 @@ button.cancel:hover {
     }
 }
 
-/* Popover styling */
-#formPopover {
-    max-width: 60rem;
-    padding: 2rem;
-    border: none;
-    border-radius: 1rem;
-    margin: auto;
-
-}
-
-#formPopover::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
 /* Create button */
 #createButton {
     margin: auto;
@@ -304,31 +276,108 @@ button.cancel:hover {
     color: #855b42
 }
 
+/* Popover styling ------------------------------------------------------------------*/
+#formPopover {
+    max-width: 60rem;
+    padding: 2rem;
+    border: none;
+    border-radius: 1rem;
+    margin: auto;
+    background-color: #855b428c;
+    backdrop-filter: blur(10px);
+    border: #d1c1a4 solid 2px;
+    color: #FFF1D8;
+}
+
+#formPopover::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#form-header {
+    display: grid;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+
 #status p {
     display: none;
 }
 
 form {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto;
     justify-content: center;
-    gap: 1.5rem;
+    column-gap: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 fieldset {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+    display: grid;
+    grid-template-columns: auto, auto;
     margin-bottom: 1rem;
     border: none;
 }
 
-fieldset:has(textarea) {
-    width: 100%;
+/*formatting layout*/
+#form-name {
+    grid-column: span 2;
 }
 
-legend {
-    text-align: left;
+button.save,
+button.cancel {
+    margin-top: 20px;
+
+    margin-bottom: 20px;
+    grid-column: span 1;
+    text-align: center;
+    width: 125px;
+    height: 40px;
+    background-color: transparent;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+button.save {
+    margin-left: auto;
+    color: #FFF1D8;
+    border: 2px solid #FFF1D8;
+}
+
+button.cancel {
+    margin-right: auto;
+    color: #FFF1D8;
+    border: 2px solid #855b42;
+
+}
+
+button.save:hover {
+    transition: 0.2s;
+    background: #d1c1a4;
+    color: #855b42;
+    border-radius: 8px;
+
+}
+
+button.cancel:hover {
+    transition: 0.2s;
+    background: #664532;
+    color: #d1c1a4;
+    border-radius: 8px;
+
+}
+
+/*------------------*/
+
+/* formating  fields */
+fieldset:has(textarea) {
+    width: 90%;
 }
 
 textarea {
@@ -337,38 +386,27 @@ textarea {
 }
 
 fieldset:has(button) {
-    width: 100%;
+    width: auto;
     flex-direction: row;
     gap: 2rem;
     justify-content: center;
 }
 
-
-fieldset:has(input[type=checkbox]) {
-    gap: 0.5rem;
+.field {
+    background-color: #ffffff;
+    font-family: 'DM Mono', monospace;
+    color: #88553a;
+    padding: 0.5rem;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #855b42;
+    border-radius: 0.5rem;
 }
-
-/* layout checkboxes and radio buttons horizontally */
-label:has(input[type=radio]),
-label:has(input[type=checkbox]) {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-/* make radio and checkbox elements a bit bigger*/
-input[type=radio],
-input[type=checkbox] {
-    margin: 0;
-    padding: 0;
-    width: 1.25rem;
-    height: 1.25rem;
-}
-
 
 /* Set accent colour for inputs. */
 input {
-    accent-color: rgb(3, 136, 3);
+    accent-color: #FFF1D8;
+    cursor: pointer;
 }
 
 /* Style default padding for form elements */
@@ -378,20 +416,13 @@ option {
     padding: 0.5rem;
 }
 
-/* Range slider doesn't need padding on the sides */
-input[type=range] {
-    padding: 0.5rem 0rem;
-}
-
-/* Color picker does not need padding at all */
 input[type=color] {
-    width: 108px;
+    width: auto;
     height: 36px;
     margin: 0;
-    background: white;
-    border: 1px solid #aaa;
-    border-radius: 0.5rem;
+    background: #ffffff;
     padding: 0.15rem 0.25rem;
+    cursor: pointer;
 }
 
 .validation {
@@ -415,6 +446,7 @@ textarea:user-invalid+.validation {
     display: block;
 }
 
+/* -=--------------------------------------------------------------------------------- */
 /*  card styles */
 .item-card {
     border-radius: 1rem;
@@ -441,15 +473,6 @@ textarea:user-invalid+.validation {
 
 meter {
     height: 1rem;
-
-}
-
-/* Set accent colour for meter. */
-
-/* Style the background bar of the meter */
-meter::-webkit-meter-bar {
-    background: #fff;
-    /* background color of the meter */
 }
 
 /* Style for the 'optimum' range (e.g., the highest value range) */
@@ -475,20 +498,9 @@ meter::-webkit-meter-optimum-value {
     border: 3px solid var(--meter-border, #845015);
     color: var(--meter-accent, #845015);
     height: 12px;
-
 }
 
-/* Style for the 'sub-optimum' range (e.g., medium value range) */
-meter::-webkit-meter-suboptimum-value {
-    background: #7b287c;
-}
-
-/* Style for the 'even-less-good' range (e.g., low value range) */
-meter::-webkit-meter-even-less-good-value {
-    background: #e3c784;
-}
-
-
+/* 
 
 .stats .stat {
     display: flex;
@@ -552,7 +564,7 @@ meter::-webkit-meter-even-less-good-value {
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
-}
+} */
 
 
 .buttons {
