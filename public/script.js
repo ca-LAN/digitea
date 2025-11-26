@@ -138,7 +138,7 @@ const editItem = (data) => {
     })
 
     // Update the heading to indicate edit mode
-    formHeading.textContent = '🍵 Edit Tea'
+    formHeading.textContent = 'Editing tea'
 
     // Show the popover (use fallback if API missing)
     popoverShow(formPopover)
