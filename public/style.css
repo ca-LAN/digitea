@@ -81,9 +81,16 @@ button {
     border-top-right-radius: 0.25rem;
 }
 
-/* Handle on hover */
+/* Track & Handle on hover */
+::-webkit-scrollbar-track:hover {
+    cursor: pointer;
+}
 ::-webkit-scrollbar-thumb:hover {
     background: #694936;
+    cursor: grab;
+}
+::-webkit-scrollbar-thumb:active {
+    cursor: grabbing;
 }
 
 #header {
@@ -406,7 +413,6 @@ fieldset:has(button) {
 /* Set accent colour for inputs. */
 input {
     accent-color: #FFF1D8;
-    cursor: pointer;
 }
 
 /* Style default padding for form elements */
@@ -414,6 +420,11 @@ input,
 select,
 option {
     padding: 0.5rem;
+}
+input[type=range],
+select#type,
+select#style {
+    cursor: pointer;
 }
 
 input[type=color] {
