@@ -265,13 +265,13 @@ const renderItem = (item) => {
                 </div>    
             </div>
             <div id="tea-color"style="align-items:end;">
-                <div style="width:45px;height:45px;background:${primary};-webkit-mask: url('./assets/tea-color-icon.svg') no-repeat center/contain;mask: url('./assets/tea-color-icon.svg') no-repeat center/contain;"></div>
+                <div style="width:40px;height:40px;background:${primary};-webkit-mask: url('./assets/tea-color-icon.svg') no-repeat center/contain;mask: url('./assets/tea-color-icon.svg') no-repeat center/contain;"></div>
             </div>
         </div>
     
         <div class="rating-row" style="display:flex;align-items:center;gap:0.5rem;">
             <meter max="5" min="1" value="${ratingValue || 1}" style="--meter-accent:${secondary}; --meter-border:${secondary}; flex:1;"></meter>  
-            <div style="font-weight:700;color:${secondary};">${ratingValue}/5${maxRating}</div> 
+            <div style="font-weight:700;font-size:14px;color:${secondary};">${ratingValue}/5${maxRating}</div> 
         </div>
         <div class= date-container>
         <div class="date-row" style="">${dateConsumed}</div>
@@ -284,22 +284,22 @@ const renderItem = (item) => {
         <div class="extra-info" style="border-color:${secondary};">
         
         <div style="display:flex;align-items:center;gap:0.5rem;">
-                    <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('./assets/company-icon.svg') no-repeat center/contain;mask: url('./assets/company-icon.svg') no-repeat center/contain;"></div>
+                    <div style="width:30px;height:30px;background:${secondary};-webkit-mask: url('./assets/company-icon.svg') no-repeat center/contain;mask: url('./assets/company-icon.svg') no-repeat center/contain;"></div>
                     <div class="company"id="description">${companyText}</div>
-                    <a href="${item.teaLink || ''}" target="_blank" rel="noopener noreferrer"><div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('${linkIcon}') no-repeat center/contain;mask: url('${linkIcon}') no-repeat center/contain;opacity:${linkOpacity};"></div></a>
+                    <a href="${item.teaLink || ''}" target="_blank" rel="noopener noreferrer"><div style="width:30px;height:30px;background:${secondary};-webkit-mask: url('${linkIcon}') no-repeat center/contain;mask: url('${linkIcon}') no-repeat center/contain;opacity:${linkOpacity};"></div></a>
             </div> 
             <div class="caffeine-row" style="display:flex;align-items:center;gap:0.5rem;">
-                <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('${caffeineIcon}') no-repeat center/contain;mask: url('${caffeineIcon}') no-repeat center/contain;"></div>
+                <div style="width:30px;height:30px;background:${secondary};-webkit-mask: url('${caffeineIcon}') no-repeat center/contain;mask: url('${caffeineIcon}') no-repeat center/contain;"></div>
                 <meter max="10" min="0" value="${item.caffeineLevel || 0}" style="--meter-accent:${secondary}; --meter-border:${secondary}; flex:1;height:1rem;"></meter>   
             </div>
             <div style="display:flex;align-items:center;gap:0.5rem;">
-                <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('${stylePic}') no-repeat center/contain;mask: url('${stylePic}') no-repeat center/contain;"></div>
+                <div style="width:30px;height:30px;background:${secondary};-webkit-mask: url('${stylePic}') no-repeat center/contain;mask: url('${stylePic}') no-repeat center/contain;"></div>
                 <div class="ex-header"id="description" >${styleText}</div>
             </div>
-            <section class="details" id="text-field" style="${item.preferences ? '' : 'display:none;'};margin-top:0.6rem;border-color:${secondary}">
+            <section class="details" id="text-field" style="${item.preferences ? '' : 'display:none;'};margin-top:0.2rem;padding-top:10px;border-color:${secondary}">
                 <p style="margin:0">${item.preferences || ''}</p>
             </section>
-            <section class="notes" id="text-field" style="${item.notes ? '' : 'display:none;'};margin-top:0.6rem;border-color:${secondary}">
+            <section class="notes" id="text-field" style="${item.notes ? '' : 'display:none;'};margin-top:0.2rem;padding-top:10px;border-color:${secondary}">
                 <i style="margin:0">"${item.notes || ''}"</i>
             </section>
             <div class="buttons"style="margin-top:0.6rem;">
