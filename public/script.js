@@ -191,8 +191,7 @@ const renderItem = (item) => {
     const primary = item.primaryColor || '#d19234ff'
     const secondary = item.secondaryColor || '#c4c8cf'
 
-    // const favoriteSrc = item.favorite ? './assets/favorite-true.svg' : './assets/favorite-false.svg'
-    
+    const saveIcon = (item.favorite == true) ? './assets/save-true-icon.svg' : './assets/save-false-icon.svg'
     const caffeineIcon = (item.caffeineLevel && Number(item.caffeineLevel) > 0) ? './assets/caf-true-icon.svg' : './assets/caf-false-icon.svg'
 
     let stylePic;
@@ -210,11 +209,14 @@ const renderItem = (item) => {
     const linkIcon = item.teaLink ? './assets/tea-link-true-icon.svg' : ''
     const linkOpacity = item.teaLink ? '1.0' : '0.3';
 
+    const dateConsumed = item.dateConsumed ? formatDate(item.dateConsumed) : "TO BE TASTED";
+
     const template = /*html*/`
 
     <div class="main-content" >
-    <div class="topElements"style="background-color:${secondary};width:auto;height:auto;   display:grid;grid-template-columns: 33% 33% 33%;">
+    <div class="topElements"style="background-color:${secondary};width:auto;height:auto;   display:grid;grid-template-columns: 20% 20% 20% 20% 20%;">
     <img src="./assets/tag-visual.svg" style="width:24px;height:auto;display:grid;align-items:left;margin-left:15px;;"/>
+    <div style = "padding:6px; background:#FFF1D8;margin-left:-10px;margin-right:auto;margin-bottom:-10px;border-radius:0 0 10px 0"><div id="savebutton" style="width:30px;height:30px;background:${secondary};-webkit-mask: url('${saveIcon}') no-repeat center/contain;mask: url('${saveIcon}') no-repeat center/contain;"></div></div>
     <img src="./assets/top-hole.svg" style="width:24px;height:auto;display:grid;align-items:center;margin:auto; margin-top:10px;"/>
     </div>    
     <div class="item-header" style="background-color:${secondary};"> 
@@ -236,7 +238,7 @@ const renderItem = (item) => {
             <div style="font-weight:700;color:${secondary};">${ratingValue}/5</div> 
         </div>
         <div class= date-container>
-        <div class="date-row" style="">${formatDate(item.dateConsumed)}</div>
+        <div class="date-row" style="">${dateConsumed}</div>
         <div class="line" style="border-color:${secondary};"></div>
         </div>
     </div>
@@ -276,8 +278,11 @@ const renderItem = (item) => {
 
     const editBtn = div.querySelector('.edit-btn')
     const deleteBtn = div.querySelector('.delete-btn')
+    const saveBtn = div.querySelector('#savebutton')
+    
     if (editBtn) editBtn.addEventListener('click', () => editItem(item))
     if (deleteBtn) deleteBtn.addEventListener('click', () => deleteItem(item.id))
+    if (saveBtn) saveBtn.addEventListener('click', () => toggleFavorite(item.id, !item.favorite))
 
     return div
 }
