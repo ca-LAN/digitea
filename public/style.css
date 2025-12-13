@@ -14,6 +14,10 @@ body {
     color: white;
     background-image: url("./assets/wood.png");
     background-size: cover;
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+    background-position: center;
+    
 }
 
 footer {
@@ -49,6 +53,7 @@ button {
     gap: 15px;
     font-family: poppins, sans-serif;
     color: #FFF1D8;
+    margin-top:0;
 
 }
 
@@ -96,7 +101,7 @@ button {
 #header {
     display: grid;
     grid-template-columns: auto auto;
-    margin-top: 4rem;
+    margin-top: 5rem;
     margin-bottom: 0rem;
     align-items: center;
     width: 90vw;
@@ -105,33 +110,39 @@ button {
 /* Tabs Navigation */
 #tabs {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 6px;
     justify-content: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: auto;
+    padding:  0.5rem;
+    background-color: #3f2b20;
 }
 
 .tab-button {
-    background: #5a3a28;
+
+    
+    font-family: 'DM Mono', monospace;
+    background: transparent;
     color: #FFF1D8;
-    border: 2px solid #855b42;
     border-radius: 8px;
     padding: 0.6rem 1.5rem;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;   
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
-
 .tab-button:hover {
-    background: #6b4532;
-    border-color: #9a6b4f;
+        border-radius: 16px;
+
+    border-color: #ffdb7f;
+    color: #ffcd76;
+    background-color: #664532;
 }
 
 .tab-button.active {
-    background: #FFF1D8;
-    color: #5a3a28;
-    border-color: #FFF1D8;
+    color: #ffec98;
+    border-color: #fbc681;
 }
 
 .string-connector {
@@ -255,19 +266,26 @@ button {
     border-top: 2px dashed;
 }
 
-#contentArea {
+ #mainContent {
+    margin-bottom: 1rem;
     display: flex;
     width: 90vw;
-    height: 725px;
-    align-items: left;
-    gap: 25px;
+    height: 800px   ;
     overflow-x: auto;
-    padding-top: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-
+    overflow-y: hidden;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
+    overflow: overlay;    
+}
+
+#contentArea {
+    display: flex;
+    grid-gap: 25px;
+    padding-top:20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: flex-start;
+    transform: rotateX(180deg);
 }
 
 .main-content {

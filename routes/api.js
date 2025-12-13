@@ -105,6 +105,7 @@ router.put('/data/:id', async (req, res) => {
     }
 })
 
+//------------------------------------------------------------------------
 // ----- PATCH favorite -----
 // Update just the favorite field for a specific tea
 router.patch('/data/:id/favorite', async (req, res) => {
@@ -120,6 +121,7 @@ router.patch('/data/:id/favorite', async (req, res) => {
         res.status(500).send({ error: 'Failed to update favorite', details: err.message || err })
     }
 })
+//------------------------------------------------------------------------
 
 // ----- DELETE -----
 // Listen for DELETE requests
