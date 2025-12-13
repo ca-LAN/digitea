@@ -240,7 +240,7 @@ const renderItem = (item) => {
         styleText = (item.style == "LOOSE_LEAF") ? 'Loose Leaf' : 'Bagged'
     }
     const ratingValue = Math.max(0, Math.min(5, Number(item.rating) || 0))
-
+    const maxRating = ratingValue === 5 ? '!' : '';
     const companyText = item.company ? item.company : '<i>Unknown</i>'
     const linkIcon = item.teaLink ? './assets/tea-link-true-icon.svg' : ''
     const linkOpacity = item.teaLink ? '1.0' : '0.3';
@@ -271,7 +271,7 @@ const renderItem = (item) => {
     
         <div class="rating-row" style="display:flex;align-items:center;gap:0.5rem;">
             <meter max="5" min="1" value="${ratingValue || 1}" style="--meter-accent:${secondary}; --meter-border:${secondary}; flex:1;"></meter>  
-            <div style="font-weight:700;color:${secondary};">${ratingValue}/5</div> 
+            <div style="font-weight:700;color:${secondary};">${ratingValue}/5${maxRating}</div> 
         </div>
         <div class= date-container>
         <div class="date-row" style="">${dateConsumed}</div>
