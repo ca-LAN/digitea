@@ -100,6 +100,7 @@ button {
 
 #header {
     display: grid;
+    /* grid-template-columns: 33% 33% 33%; */
     grid-template-columns: auto auto;
     margin-top: 5rem;
     margin-bottom: 0rem;
@@ -112,11 +113,17 @@ button {
     display: flex;
     gap: 6px;
     justify-content: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    width: auto;
-    padding:  0.5rem;
+    width: fit-content;
+    margin-left:auto;
+    margin-right:auto;
+    padding:  1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 0px;
     background-color: #3f2b20;
+  mask: radial-gradient(20px at 20px 0,#0000 98%,#000) -20px;
+
+
 }
 
 .tab-button {
@@ -143,8 +150,20 @@ button {
 .tab-button.active {
     color: #ffec98;
     border-color: #fbc681;
+
+  animation: fade 0.3s ease forwards;
 }
 
+@keyframes fade {
+    from {
+        background-color: #ffb972;
+        transform: scale(1.05);
+       
+    } 100% {
+        background-color: #664532;
+         transform: scale(1.00);
+    }
+}
 .string-connector {
     width: 6px;
     height: 55px;
@@ -270,7 +289,7 @@ button {
     margin-bottom: 1rem;
     display: flex;
     width: 90vw;
-    height: 800px   ;
+    height: 720px   ;
     overflow-x: auto;
     overflow-y: hidden;
     border-bottom-left-radius: 1rem;
@@ -286,7 +305,7 @@ button {
     padding-right: 15px;
     align-items: flex-start;
     transform: rotateX(180deg);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 #contentArea.fade-out-left {
@@ -300,11 +319,11 @@ button {
 }
 
 #contentArea.fade-in-left {
-    animation: fadeInLeft 0.3s ease forwards;
+    animation: fadeInLeft 0.2s ease forwards;
 }
 
 #contentArea.fade-in-right {
-    animation: fadeInRight 0.3s ease forwards;
+    animation: fadeInRight 0.2s ease forwards;
 }
 
 @keyframes fadeInLeft {
@@ -343,6 +362,10 @@ button {
     height: 220px;
     display: block;
     background-color: #FFF1D8;
+}
+
+main-content:hover {
+    margin-bottom: 20px
 }
 
 /* Responsive layout for smaller screens */
@@ -430,7 +453,21 @@ fieldset {
 #form-name {
     grid-column: span 1;
 }
+#savebutton:hover {
+    cursor: pointer;
+}
+#savebbutton:active {
+    animation:normalClick 0.1s ease forwards;
+    transition: 0.5s;
+}
 
+@keyframes normalClick {
+    from {
+        transform: scale(2);
+    }100% {
+        transform: scale(0.95);
+    }
+}
 button.save,
 button.cancel {
     margin-top: 20px;

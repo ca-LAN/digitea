@@ -409,9 +409,9 @@ const switchTab = (filter) => {
             // Clean up animation class after it completes
             setTimeout(() => {
                 contentArea.classList.remove('fade-in-left', 'fade-in-right')
-            }, 300)
+            }, 200)
         })
-    }, 300)
+    }, 200)
 }
 
 if (allTab) allTab.addEventListener('click', () => switchTab('all'))
