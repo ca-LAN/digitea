@@ -378,6 +378,7 @@ createButton.addEventListener('click', myForm.reset())
 
 // Tab switching functionality
 const switchTab = (filter) => {
+    const oldFilter = currentFilter
     currentFilter = filter
     
     // Update active tab styling
@@ -389,8 +390,28 @@ const switchTab = (filter) => {
         allTab.classList.remove('active')
     }
     
-    // Refresh data with new filter
-    getData()
+    // Determine animation direction
+    // Going from 'all' to 'favorites' = move right (fade out right, fade in right)
+    // Going from 'favorites' to 'all' = move left (fade out left, fade in left)
+    const direction = (oldFilter === 'all' && filter === 'favorites') ? 'right' : 'left'
+    
+    // Add fade-out class
+    contentArea.classList.remove('fade-in-left', 'fade-in-right')
+    contentArea.classList.add(`fade-out-${direction}`)
+    
+    // Wait for fade-out animation, then refresh data
+    setTimeout(() => {
+        getData().then(() => {
+            // Remove fade-out and add fade-in
+            contentArea.classList.remove(`fade-out-${direction}`)
+            contentArea.classList.add(`fade-in-${direction}`)
+            
+            // Clean up animation class after it completes
+            setTimeout(() => {
+                contentArea.classList.remove('fade-in-left', 'fade-in-right')
+            }, 300)
+        })
+    }, 300)
 }
 
 if (allTab) allTab.addEventListener('click', () => switchTab('all'))
