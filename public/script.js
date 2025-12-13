@@ -191,7 +191,8 @@ const renderItem = (item) => {
     const primary = item.primaryColor || '#d19234ff'
     const secondary = item.secondaryColor || '#c4c8cf'
 
-    const favoriteSrc = item.favorite ? './assets/favorite-true.svg' : './assets/favorite-false.svg'
+    // const favoriteSrc = item.favorite ? './assets/favorite-true.svg' : './assets/favorite-false.svg'
+    
     const caffeineIcon = (item.caffeineLevel && Number(item.caffeineLevel) > 0) ? './assets/caf-true-icon.svg' : './assets/caf-false-icon.svg'
 
     let stylePic;
@@ -206,6 +207,8 @@ const renderItem = (item) => {
     const ratingValue = Math.max(0, Math.min(5, Number(item.rating) || 0))
 
     const companyText = item.company ? item.company : '<i>Unknown</i>'
+    const linkIcon = item.teaLink ? './assets/tea-link-true-icon.svg' : ''
+    const linkOpacity = item.teaLink ? '1.0' : '0.3';
 
     const template = /*html*/`
 
@@ -245,6 +248,7 @@ const renderItem = (item) => {
         <div style="display:flex;align-items:center;gap:0.5rem;">
                     <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('./assets/company-icon.svg') no-repeat center/contain;mask: url('./assets/company-icon.svg') no-repeat center/contain;"></div>
                     <div class="company"id="description">${companyText}</div>
+                    <a href="${item.teaLink || ''}" target="_blank" rel="noopener noreferrer"><div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('${linkIcon}') no-repeat center/contain;mask: url('${linkIcon}') no-repeat center/contain;opacity:${linkOpacity};"></div></a>
             </div> 
             <div class="caffeine-row" style="display:flex;align-items:center;gap:0.5rem;">
                 <div style="width:35px;height:35px;background:${secondary};-webkit-mask: url('${caffeineIcon}') no-repeat center/contain;mask: url('${caffeineIcon}') no-repeat center/contain;"></div>
