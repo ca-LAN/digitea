@@ -12,6 +12,7 @@ model tea {
   name         String
   type         String?
   company      String?
+  teaLink      String?
   dateConsumed DateTime? @db.Date
   style        String?
   rating       Int?     @db.Int
