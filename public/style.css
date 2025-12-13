@@ -102,6 +102,38 @@ button {
     width: 90vw;
 }
 
+/* Tabs Navigation */
+#tabs {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.tab-button {
+    background: #5a3a28;
+    color: #FFF1D8;
+    border: 2px solid #855b42;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    background: #6b4532;
+    border-color: #9a6b4f;
+}
+
+.tab-button.active {
+    background: #FFF1D8;
+    color: #5a3a28;
+    border-color: #FFF1D8;
+}
+
 .string-connector {
     width: 6px;
     height: 55px;

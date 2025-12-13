@@ -5,6 +5,11 @@ let contentArea = document.querySelector('#contentArea')
 let formPopover = document.querySelector('#formPopover')
 let createButton = document.querySelector('#createButton')
 let formHeading = document.querySelector('#formPopover h2')
+let allTab = document.querySelector('#allTab')
+let favoritesTab = document.querySelector('#favoritesTab')
+
+// Track current filter
+let currentFilter = 'all'
 
 // Popover show/hide helpers with fallbacks for browsers without the popover API
 const popoverShow = (el) => {
@@ -330,13 +335,21 @@ const getData = async () => {
             const data = await response.json()
             console.log('Fetched data:', data)
 
-            if (data.length == 0) {
-                contentArea.innerHTML = '<p><i>No data found in the database.</i></p>'
+            // Filter data based on current tab
+            const filteredData = currentFilter === 'favorites' 
+                ? data.filter(item => item.favorite === true)
+                : data
+
+            if (filteredData.length == 0) {
+                const message = currentFilter === 'favorites' 
+                    ? '<p><i>No favorite teas yet. Click the save icon on a tea to mark it as a favorite!</i></p>'
+                    : '<p><i>No data found in the database.</i></p>'
+                contentArea.innerHTML = message
                 return
             }
             else {
                 contentArea.innerHTML = ''
-                data.forEach(item => {
+                filteredData.forEach(item => {
                     const itemDiv = renderItem(item)
                     contentArea.appendChild(itemDiv)
                 })
@@ -362,6 +375,26 @@ myForm.addEventListener('reset', () => formHeading.textContent = 'What are you d
 
 // Reset the form when the create button is clicked. 
 createButton.addEventListener('click', myForm.reset())
+
+// Tab switching functionality
+const switchTab = (filter) => {
+    currentFilter = filter
+    
+    // Update active tab styling
+    if (filter === 'all') {
+        allTab.classList.add('active')
+        favoritesTab.classList.remove('active')
+    } else {
+        favoritesTab.classList.add('active')
+        allTab.classList.remove('active')
+    }
+    
+    // Refresh data with new filter
+    getData()
+}
+
+if (allTab) allTab.addEventListener('click', () => switchTab('all'))
+if (favoritesTab) favoritesTab.addEventListener('click', () => switchTab('favorites'))
 
 // Hide popover on initial load
 popoverHide(formPopover)
