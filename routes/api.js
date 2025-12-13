@@ -105,6 +105,22 @@ router.put('/data/:id', async (req, res) => {
     }
 })
 
+// ----- PATCH favorite -----
+// Update just the favorite field for a specific tea
+router.patch('/data/:id/favorite', async (req, res) => {
+    try {
+        const { favorite } = req.body
+        const updated = await prisma[model].update({
+            where: { id: req.params.id },
+            data: { favorite: favorite }
+        })
+        res.send(updated)
+    } catch (err) {
+        console.error('PATCH /data/:id/favorite error:', err)
+        res.status(500).send({ error: 'Failed to update favorite', details: err.message || err })
+    }
+})
+
 // ----- DELETE -----
 // Listen for DELETE requests
 // respond by deleting a particular record in the database

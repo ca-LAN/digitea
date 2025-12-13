@@ -172,6 +172,37 @@ const deleteItem = async (id) => {
     }
 }
 
+// Toggle favorite status
+const toggleFavorite = async (id, newFavoriteStatus) => {
+    const endpoint = `/data/${id}/favorite`
+    const options = {
+        method: "PATCH",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ favorite: newFavoriteStatus })
+    }
+
+    try {
+        const response = await fetch(endpoint, options)
+
+        if (response.ok) {
+            const result = await response.json()
+            console.log('Favorite updated:', result)
+            // Refresh the data list to show the updated icon
+            getData()
+        }
+        else {
+            const errorData = await response.json()
+            alert(errorData.error || 'Failed to update favorite')
+        }
+    } catch (error) {
+        console.error('Favorite update error:', error)
+        alert('An error occurred while updating favorite')
+    }
+}
+
 // Format date as "MON D, YYYY" (e.g. NOV 2, 2025)
 const formatDate = (date) => {
     if (!date) return ''
